@@ -6,9 +6,9 @@ app = FastAPI(title="Site Monitor")
 def health():
     return {"status": "ok"}
 
-@app.get("____")
-def ____():
+@app.get("/sites")
+def listar_sites():
     return [
-        {"id": 1, "name": "____", "url": "____"},
-        {"id": 2, "name": "____", "url": "____"},
+        {"id": 1, "name": "Example", "url": "https://example.com"},
+        {"id": 2, "name": "Example Org", "url": "https://example.org"},
     ]
