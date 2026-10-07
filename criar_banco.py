@@ -5,11 +5,12 @@ cursor = conexao.cursor()
 
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS sites (
-    id INTERGER PRIMARY KEY,
+    id INTEGER PRIMARY KEY,
     name TEXT,
     url TEXT
     
 );
 """)
 conexao.commit()
-conexao.commit()
+conexao.close()
+
