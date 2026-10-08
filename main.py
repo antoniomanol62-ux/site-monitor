@@ -1,3 +1,5 @@
+import sqlite3
+
 from fastapi import FastAPI
 
 app = FastAPI(title="Site Monitor")
@@ -8,7 +10,13 @@ def health():
 
 @app.get("/sites")
 def listar_sites():
-    return [
-        {"id": 1, "name": "Example", "url": "https://example.com"},
-        {"id": 2, "name": "Example Org", "url": "https://example.org"},
-    ]
+    conexao = sqlite3.connect("sites.db")
+    cursor = conexao.cursor()
+    cursor.execute("SELECT id, name, url FROM sites")
+    linhas = cursor.fetchall()
+    conexao.close()
+
+    resultado = []
+    for linha in linhas:
+        resultado.append({"id": linha[0], "name": linha[1], "url": linha[2]})
+    return resultado

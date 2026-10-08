@@ -7,6 +7,10 @@ cursor.execute("""
 INSERT INTO sites (name, url) VALUES ('Example', 'https://example.com');
 """)
 
+cursor.execute("""
+INSERT INTO sites (name, url) VALUES ('Example Net', 'https://example.net');
+""")
+
 conexao.commit()
 
 cursor.execute("SELECT * FROM sites")
