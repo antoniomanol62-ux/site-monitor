@@ -20,3 +20,16 @@ def listar_sites():
     for linha in linhas:
         resultado.append({"id": linha[0], "name": linha[1], "url": linha[2]})
     return resultado
+
+from pydantic import BaseModel
+
+class LivroNovo(BaseModel):
+    titulo: str
+
+@app.post("/livros", status_code=201)
+def criar_livro(livro: LivroNovo):
+    conexao = sqlite3.connect("Livros.db")
+    cursor = conexao.cursor()
+    novo_id = cursor.lastrowid
+    conexao.close()
+    return{"id": novo_id, "titulo": livro.titulo}
