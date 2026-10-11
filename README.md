@@ -25,7 +25,7 @@ A documentação interativa (Swagger) fica em `http://localhost:8000/docs`.
 ## Roadmap
 
 - [x] API mínima com FastAPI
-- [ ] Banco SQLite e cadastro de sites (`POST /sites`)
+- [x] Banco SQLite e cadastro de sites (`POST /sites`)
 - [ ] Verificador em segundo plano com retry e alerta no Slack
 - [ ] Página web que consome a API
 - [ ] Testes com pytest e CI no GitHub Actions
