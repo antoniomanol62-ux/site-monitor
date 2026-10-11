@@ -7,7 +7,7 @@ cursor.execute("""
 CREATE TABLE IF NOT EXISTS sites (
     id INTEGER PRIMARY KEY,
     name TEXT,
-    url TEXT
+    url TEXT UNIQUE
     
 );
 """)
