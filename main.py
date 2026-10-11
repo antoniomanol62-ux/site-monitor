@@ -1,4 +1,5 @@
 import sqlite3
+from fastapi import FastAPI, HTTPException
 
 from fastapi import FastAPI
 from pydantic import BaseModel
@@ -34,8 +35,12 @@ def listar_sites():
 def criar_site(site: SiteNovo):
     conexao = sqlite3.connect("sites.db")
     cursor = conexao.cursor()
-    cursor.execute("INSERT INTO sites (name, url) VALUES (?, ?)", (site.name, site.url))
-    conexao.commit()
+    try:
+        cursor.execute("INSERT INTO sites (name, url) VALUES (?, ?)", (site.name, site.url))
+        conexao.commit()
+    except sqlite3.IntegrityError:
+        conexao.close()
+        raise HTTPException(status_code=409, detail="Site já cadastrado")
     novo_id = cursor.lastrowid
     conexao.close()
     return {"id": novo_id, "name": site.name, "url": site.url}
